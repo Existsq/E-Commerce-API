@@ -5,6 +5,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToOne;
 import lombok.Getter;
 
 @Entity
@@ -13,12 +14,14 @@ public class UserEntity {
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
   @Column(unique = true, nullable = false)
-  Integer id;
+  private Integer id;
+
+  @Column(nullable = false, unique = true)
+  private String username;
 
   @Column(nullable = false)
-  Integer earnings;
+  private String password;
 
-  @Column Integer orders;
-
-  @Column Integer products;
+  @OneToOne(mappedBy = "user")
+  private OrderEntity order;
 }
